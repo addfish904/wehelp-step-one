@@ -126,6 +126,9 @@ table {
 }
 
 /* css樣式開始 */
+.header {
+  overflow: hidden;
+}
 #menu_control {
   display: none;
 }
@@ -209,7 +212,7 @@ table {
   width: 100%;
   padding: 10px;
   text-align: center;
-  background-color: rgb(204 222 232 / 50%);
+  background-color: rgb(255 255 255 / 50%);
 }
 /* 隱藏手機版選單 */
 .hamburger-menu {
@@ -219,7 +222,7 @@ table {
   display: none;
 }
 
-@media (min-width: 600px) and (max-width: 1200px) {
+@media (min-width: 601px) and (max-width: 1200px) {
   .main-content {
     max-width: 90%;
   }
@@ -292,7 +295,7 @@ table {
     width: 60%;
     height: 100vh;
     background-color: #fff;
-    position: absolute;
+    position: fixed;
     z-index: 90;
     top: 0;
     right: 0;
