@@ -126,6 +126,9 @@ table {
 }
 
 /* css樣式開始 */
+#menu_control {
+  display: none;
+}
 .top-section {
   display: flex;
   justify-content: center;
@@ -139,7 +142,9 @@ table {
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  height: 50px;
+  padding: 0 20px;
+  align-items: center;
 }
 .navbar-list {
   display: flex;
@@ -206,6 +211,13 @@ table {
   text-align: center;
   background-color: rgb(204 222 232 / 50%);
 }
+/* 隱藏手機版選單 */
+.hamburger-menu {
+  display: none;
+}
+.menu_btn span {
+  display: none;
+}
 
 @media (min-width: 600px) and (max-width: 1200px) {
   .main-content {
@@ -247,5 +259,60 @@ table {
   .box:nth-child(9),
   .box:nth-child(10) {
     grid-column: 1;
+  }
+  /* 漢堡選單 */
+  .navbar-list {
+    display: none;
+  }
+  .menu_btn {
+    display: block;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 99;
+  }
+  .menu_btn::after,
+  .menu_btn::before {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 2px;
+    background-color: #aaa;
+    margin: auto;
+    top: 50%;
+    right: 15px;
+    transition: 0.5s;
+  }
+  .menu_btn::before {
+    box-shadow: 0 10px 0 #aaa, 0 -10px 0 #aaa;
+  }
+  .hamburger-menu {
+    width: 60%;
+    height: 100vh;
+    background-color: #fff;
+    position: absolute;
+    z-index: 90;
+    top: 0;
+    right: 0;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 0;
+    transition: 0.5s;
+    transform: translateX(100%);
+  }
+  #menu_control:checked ~ .hamburger-menu {
+    transform: translateX(0%);
+  }
+  #menu_control:checked ~ .menu_btn:before {
+    box-shadow: none;
+    transform: rotate(45deg);
+  }
+  #menu_control:checked ~ .menu_btn:after {
+    transform: rotate(-45deg);
   }
 }
