@@ -24,12 +24,11 @@ def find_and_print(messages, current_station):
     closest_friend = None
     min_distance = float('inf')
 
-    # BFS 計算兩站間的最短距離
     def station_distance(start, end):
         if start == end:
             return 0
         visited = set()
-        queue = [(start, 0)]  # [(current_station, distance)]
+        queue = [(start, 0)]
 
         while queue:
             station, distance = queue.pop(0)
@@ -43,16 +42,14 @@ def find_and_print(messages, current_station):
                 if neighbor not in visited:
                     queue.append((neighbor, distance + dist))
         
-        return float('inf')  # 無法到達
+        return float('inf')
 
-    # 找出訊息中的車站名稱
     def station_name(message):
         for station in mrt_stations.keys():
             if station in message:
                 return station
         return None
 
-    # 判斷哪位朋友最近
     for friend, message in messages.items():
         station = station_name(message)
         if station:
