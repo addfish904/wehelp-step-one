@@ -1,58 +1,75 @@
-const mrtStations = [
-    "Songshan",
-    "Nanjing Sanmin",
-    "Taipei Arena",
-    "Nanjing Fuxing",
-    "Songjiang Nanjing",
-    "Zhongshan",
-    "Ximen",
-    "Xiaonanmen",
-    "Chiang Kai-shek Memorial Hall",
-    "Guting",
-    "Taipower Building",
-    "Gongguan",
-    "Wanlong",
-    "Jingmei",
-    "Dapinglin",
-    "Qizhang",
-    "Xindian City Hall",
-    "Xindian"
-];
-
+const mrtStations = {
+    "Songshan": { "Nanjing Sanmin": 1 },
+    "Nanjing Sanmin": { "Songshan": 1, "Taipei Arena": 1 },
+    "Taipei Arena": { "Nanjing Sanmin": 1, "Nanjing Fuxing": 1 },
+    "Nanjing Fuxing": { "Taipei Arena": 1, "Songjiang Nanjing": 1 },
+    "Songjiang Nanjing": { "Nanjing Fuxing": 1, "Zhongshan": 1 },
+    "Zhongshan": { "Songjiang Nanjing": 1, "Ximen": 1 },
+    "Ximen": { "Zhongshan": 1, "Xiaonanmen": 1 },
+    "Xiaonanmen": { "Ximen": 1, "Chiang Kai-shek Memorial Hall": 1 },
+    "Chiang Kai-shek Memorial Hall": { "Xiaonanmen": 1, "Guting": 1 },
+    "Guting": { "Chiang Kai-shek Memorial Hall": 1, "Taipower Building": 1 },
+    "Taipower Building": { "Guting": 1, "Gongguan": 1 },
+    "Gongguan": { "Taipower Building": 1, "Wanlong": 1 },
+    "Wanlong": { "Gongguan": 1, "Jingmei": 1 },
+    "Jingmei": { "Wanlong": 1, "Dapinglin": 1 },
+    "Dapinglin": { "Jingmei": 1, "Qizhang": 1 },
+    "Qizhang": { "Dapinglin": 1, "Xindian City Hall": 1, "Xiaobitan": 1 },
+    "Xiaobitan": { "Qizhang": 1 },
+    "Xindian City Hall": { "Qizhang": 1, "Xindian": 1 },
+    "Xindian": { "Xindian City Hall": 1 }
+};
 function findAndPrint(messages, currentStation) {
     let closestFriend = null;
     let minDistance = Infinity;
 
-    //找到訊息中的站名
+    //計算兩站間的距離
+    function stationDistance(start, end) {
+        if (start === end) return 0;
+        let visited = new Set();
+        let queue = [[start, 0]]; // [currentStation, distance]
+
+        while (queue.length > 0) {
+            let [station, distance] = queue.shift();
+
+            if (station === end) return distance;
+
+            visited.add(station);
+
+            for (let neighbor in mrtStations[station]) {
+                if (!visited.has(neighbor)) {
+                    queue.push([neighbor, distance + mrtStations[station][neighbor]]);
+                }
+            }
+        }
+        return Infinity;
+    }
+
     function stationName(message) {
-        for (let station of mrtStations) {
+        for (let station in mrtStations) {
             if (message.includes(station)) {
                 return station;
             }
         }
         return null;
     }
-    //計算兩個站之間的距離
-    function stationDistance(station1, station2) {
-        let index1 = mrtStations.indexOf(station1);
-        let index2 = mrtStations.indexOf(station2);
-        return Math.abs(index1 - index2);
-    }
-    //判斷哪位朋友最近
+
     for (let [friend, message] of Object.entries(messages)) {
         let station = stationName(message);
         if (station) {
-            let distance = stationDistance(station, currentStation);
+            let distance = stationDistance(currentStation, station);
             if (distance < minDistance) {
                 minDistance = distance;
                 closestFriend = friend;
             }
         }
     }
+
     if (closestFriend) {
         console.log(closestFriend);
-    } 
+    }
 }
+
 
 const messages = {
     "Bob": "I'm at Ximen MRT station.",
