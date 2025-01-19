@@ -19,10 +19,6 @@ mrt_stations = [
     "Xindian"
 ]
 
-mrt_connections = {
-    "Qizhang": ["Xiaobitan"]
-}
-
 def find_and_print(messages, current_station):
     closest_friend = None
     min_distance = float('inf')

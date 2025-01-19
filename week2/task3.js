@@ -1,5 +1,5 @@
 function func(...data){
-    // 1. 判斷名字有幾個字
+    //判斷名字有幾個字
     let middlename = data.map(name => {
         if(name.length === 2 || name.length === 3){
             return name[1];
@@ -9,14 +9,14 @@ function func(...data){
             return null;
         }
     })
-    // 2. 計算每個字出現的次數
+    //計算每個字出現的次數
     let count ={}
     for (let char of middlename) {
         if (char) {
             count[char] = (count[char] || 0) + 1;
         }
     }
-    //3. 找出有唯一中間字的完整姓名
+    //找出有唯一中間字的完整姓名
     for (let name of data) {
         let middle;
         if (name.length === 2 || name.length === 3) {
@@ -29,7 +29,6 @@ function func(...data){
             return;
         }
     }
-    // 4. 如果沒有唯一的中間字，輸出「沒有」
     console.log("沒有");
 }
 

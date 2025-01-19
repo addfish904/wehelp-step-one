@@ -1,5 +1,5 @@
 function book(consultants, hour, duration, criteria) {
-    // 1. 篩選符合時間條件的顧問
+    //篩選符合時間條件的顧問
     const availableConsultants = consultants.filter(consultant => {
         const bookings = consultant.bookings || [];
         return bookings.every(([start, end]) => {
@@ -9,18 +9,18 @@ function book(consultants, hour, duration, criteria) {
         });
     });
 
-    // 2. 根據標準排序
+    //根據標準（price和rate）排序
     if (criteria === "price") {
         availableConsultants.sort((a, b) => a.price - b.price);
     } else if (criteria === "rate") {
         availableConsultants.sort((a, b) => b.rate - a.rate);
     }
 
-    // 3. 判斷結果
+    //判斷結果
     if (availableConsultants.length > 0) {
         const selected = availableConsultants[0];
         console.log(selected.name);
-        // 加入預約
+
         if (!selected.bookings) {
             selected.bookings = [];
         }

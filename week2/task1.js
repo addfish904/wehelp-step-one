@@ -1,4 +1,3 @@
-// 捷運綠線站點（依序排列）
 const mrtStations = [
     "Songshan",
     "Nanjing Sanmin",
@@ -19,9 +18,6 @@ const mrtStations = [
     "Xindian City Hall",
     "Xindian"
 ];
-const mrtConnections = {
-    Qizhang: ["Xiaobitan"]
-};
 
 function findAndPrint(messages, currentStation) {
     let closestFriend = null;
@@ -42,7 +38,7 @@ function findAndPrint(messages, currentStation) {
         let index2 = mrtStations.indexOf(station2);
         return Math.abs(index1 - index2);
     }
-    //判斷是哪位朋友最近
+    //判斷哪位朋友最近
     for (let [friend, message] of Object.entries(messages)) {
         let station = stationName(message);
         if (station) {
