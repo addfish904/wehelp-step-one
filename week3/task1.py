@@ -19,7 +19,12 @@ for item in data1["data"]["results"]:
     longitude = item["longitude"]
     images = item["filelist"].split("http")
     address = item["info"]
-    district = next((d for d in districts if d in address), "未知區")
+    district = "未知區"
+    for d in districts:
+        if d in address:
+            district = d
+            break
+
 
     spots_dict[serial_no] = {
         "title": spotTitle,
