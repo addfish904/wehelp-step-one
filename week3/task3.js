@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
             imgUrl = "https://" + parts[1];
           }
         }
-
         img.src = imgUrl;
         img.alt = spots[i].stitle;
         title.textContent = spots[i].stitle;
