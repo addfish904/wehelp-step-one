@@ -245,8 +245,8 @@ table {
   .first-column {
     grid-column: span 1;
   }
-  .box:nth-child(9),
-  .box:nth-child(10) {
+  .box:nth-last-child(2),
+  .box:nth-last-child(1) {
     grid-column: span 2;
   }
 }

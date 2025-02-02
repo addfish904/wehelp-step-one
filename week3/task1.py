@@ -18,7 +18,6 @@ for item in data2["data"]:
     district = address.split("  ")[1][:3]
     serial_to_district[serial_no] = district
 
-
 spots_dict = {}
 
 #資料一
