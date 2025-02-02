@@ -8,55 +8,61 @@ src2 = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-ass
 with request.urlopen(src1) as response:
     data1 = json.load(response)
 
-districts = ["中正區", "萬華區", "中山區", "大同區", "大安區", "松山區", "信義區", "士林區", "文山區", "北投區", "內湖區", "南港區"]
+with request.urlopen(src2) as response:
+    data2 = json.load(response)
+
+serial_to_district = {}
+for item in data2["data"]:
+    serial_no = item["SERIAL_NO"]
+    address = item["address"]
+    district = address.split("  ")[1][:3]
+    serial_to_district[serial_no] = district
+
+
 spots_dict = {}
 
-#資料1
+#資料一
 for item in data1["data"]["results"]:
     serial_no = item["SERIAL_NO"]
     spotTitle = item["stitle"]
     latitude = item["latitude"]
     longitude = item["longitude"]
     images = item["filelist"].split("http")
-    address = item["info"]
-    district = "未知區"
-    for d in districts:
-        if d in address:
-            district = d
-            break
+    image_url = f"http{images[1]}" if len(images) > 1 else ""
 
+    #從資料二取得區域名稱
+    district = serial_to_district.get(serial_no, "未知區")
 
     spots_dict[serial_no] = {
         "title": spotTitle,
         "district": district,
         "longitude": longitude,
         "latitude": latitude,
-        "images": ["http" + img for img in images if img][0],
+        "images": image_url,
         "mrt": "",
     }
 
-#資料2
-with request.urlopen(src2) as response:
-    data2 = json.load(response)
-
 mrt_dict = {}
 
+#資料二
 for item in data2["data"]:
     serial_no = item["SERIAL_NO"]
     mrt_name = item["MRT"]
-    
+
     if serial_no in spots_dict:
         spots_dict[serial_no]["mrt"] = mrt_name
         if mrt_name not in mrt_dict:
             mrt_dict[mrt_name] = []
         mrt_dict[mrt_name].append(spots_dict[serial_no]["title"])
 
+#spot.csv
 with open("spot.csv", "w", newline="", encoding="utf-8") as f:
     writer = csv.writer(f)
     writer.writerow(["景點名稱", "地區", "經度", "緯度", "圖片URL"])
     for spot in spots_dict.values():
         writer.writerow([spot["title"], spot["district"], spot["longitude"], spot["latitude"], spot["images"]])
 
+#mrt.csv
 with open("mrt.csv", "w", newline="", encoding="utf-8") as f:
     writer = csv.writer(f)
     writer.writerow(["捷運站名稱"] + [f"景點名稱{i}" for i in range(1, 11)])

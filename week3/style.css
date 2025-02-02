@@ -225,6 +225,7 @@ table {
 /*更多按鈕*/
 #loadMore {
   margin: 30px auto 0;
+  padding: 15px 40px;
 }
 
 @media (min-width: 601px) and (max-width: 1200px) {
