@@ -8,21 +8,20 @@ app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# 設定 SessionMiddleware（管理使用者登入狀態）
 app.add_middleware(SessionMiddleware, secret_key="your_secret_key")
 
 templates = Jinja2Templates(directory="templates")
 
-#Task 1: 首頁 (Home Page)
+#Task1: 首頁
 @app.get("/")
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-#Task 2: 驗證機制 (Login Verification)
+#Task2: 驗證機制
 @app.post("/signin")
 def signin(request: Request, username: str = Form(""), password: str = Form("")):
     if not username or not password:
-        return RedirectResponse(url="/error?message=Please enter username and password", status_code=303)
+        return RedirectResponse(url="/error?message=請輸入帳號和密碼", status_code=303)
     
     if username == "test" and password == "test":
         request.session["SIGNED-IN"] = True
@@ -30,7 +29,6 @@ def signin(request: Request, username: str = Form(""), password: str = Form(""))
     
     return RedirectResponse(url="/error?message=帳號、或密碼輸入錯誤", status_code=303)
 
-# 🔹 Task 2: 成功與錯誤頁面
 @app.get("/member")
 def member(request: Request):
     if not request.session.get("SIGNED-IN"):
@@ -41,13 +39,13 @@ def member(request: Request):
 def error(request: Request, message: str):
     return templates.TemplateResponse("error.html", {"request": request, "message": message})
 
-# 🔹 Task 3: 登出功能
+#Task3: 會員狀態管理
 @app.get("/signout")
 def signout(request: Request):
     request.session["SIGNED-IN"] = False
     return RedirectResponse(url="/", status_code=303)
 
-# 🔹 Task 4: Path Parameter（平方計算）
+#Task4: 平方計算
 @app.get("/square/{number}")
 def square(request: Request, number: int):
     squared = number ** 2
