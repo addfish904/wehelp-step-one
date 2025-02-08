@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>登入頁面</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <div class="top-section">
+        <h1>歡迎光臨，請輸入帳號密碼</h1>
+    </div>
+    <div class="signIn-section">
+        <h2>登入系統</h2>
+        <form action="/signin" method="post" onsubmit="return validateForm()">
+            <span style="margin-right: 10px;">帳號</span><input type="text" name="username"><br>
+            <span style="margin-right: 10px;">密碼</span><input type="password" name="password"><br>
+            <label style="margin-right: 10px;">同意條款</label><input type="checkbox" id="agree"><br>
+            <button type="submit">登入</button>
+        </form>
+    </div>
+    <div class="square-seection">
+        <h2>計算正整數的平方</h2>
+        <form onsubmit="return calculateSquare(event)">
+            <span style="margin-right: 10px;">正整數</span><input type="text" id="square-input">
+            <button type="submit">計算</button>
+        </form>
+    </div>
+
+</body>
+</html>
