@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Form, Request, Depends
+from fastapi import FastAPI, Form, Request
 from fastapi.responses import RedirectResponse
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.templating import Jinja2Templates
