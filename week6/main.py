@@ -4,8 +4,8 @@ from starlette.middleware.sessions import SessionMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import mysql.connector
-import os
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 

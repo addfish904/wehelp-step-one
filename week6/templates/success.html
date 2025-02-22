@@ -22,7 +22,7 @@
     <div class="message-list">
         {% for msg in messages %}
         <div class="message-item">
-            <span class="message-author">{{ msg.name }}：</span>
+            <span class="message-author">{{ msg.name }}</span>
             <span class="message-content">{{ msg.content }}</span>
     
             {% if msg.name == name %}
