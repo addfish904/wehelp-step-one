@@ -102,7 +102,7 @@ def signout(request: Request):
     return RedirectResponse(url="/", status_code=303)
 
 #發布留言
-@app.post("/CreateMessage")
+@app.post("/createMessage")
 def create_message(request: Request, content: str = Form("")):
     if not request.session.get("SIGNED-IN"):
         return RedirectResponse(url="/", status_code=303)
@@ -117,7 +117,7 @@ def create_message(request: Request, content: str = Form("")):
     return RedirectResponse(url="/member", status_code=303)
 
 #刪除留言
-@app.post("/DeleteMessage")
+@app.post("/deleteMessage")
 def delete_message(request: Request, message_id: int = Form(...)):
     if not request.session.get("SIGNED-IN"):
         return RedirectResponse(url="/", status_code=303)

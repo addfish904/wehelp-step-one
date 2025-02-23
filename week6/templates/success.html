@@ -11,7 +11,7 @@
     <p>恭喜您，成功登入系統</p>
     <a href="/signout">登出系統</a>
 
-    <form action="/CreateMessage" method="post">
+    <form action="/createMessage" method="post">
         <div class="message-form">
             <h2>快來留言吧</h2>
             <span style="margin-right: 10px;">內容</span><input type="text" name="content">
@@ -26,7 +26,7 @@
             <span class="message-content">{{ msg.content }}</span>
     
             {% if msg.name == name %}
-            <form class="delete-form" action="/DeleteMessage" method="post">
+            <form class="delete-form" action="/deleteMessage" method="post">
                 <input type="hidden" name="message_id" value="{{ msg.id }}">
                 <button type="submit" class="delete-button">✖</button>
             </form>
