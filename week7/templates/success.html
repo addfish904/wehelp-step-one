@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>登入成功</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <div class="top-section">
+        <h1>歡迎光臨，這是會員頁</h1>
+    </div>
+    <p>恭喜您，成功登入系統</p>
+    <a href="/signout">登出系統</a>
+
+    <div class="main-section">
+        <h2>會員查詢</h2>
+        <div class="memberQuery">
+            <input type="text" id="queryUsername">
+            <button onclick="queryMember()">查詢</button>
+        </div>
+        <p id="queryResult"></p>
+    </div>
+    <div class="main-section">
+        <h2>更新我的姓名</h2>
+        <div class="memberQuery">
+            <input type="text" id="updateName">
+            <button onclick="updateName()">更新</button>
+        </div>
+        <p id="updateResult"></p>
+    </div>
+</body>
+</html>
