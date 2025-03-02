@@ -122,7 +122,7 @@ class UpdateNameRequest(BaseModel):
 @app.patch("/api/member")
 async def update_username(request: Request, update_data: UpdateNameRequest):
     if not request.session.get("SIGNED-IN"):
-        raise HTTPException(status_code=401, detail="未登入")
+        return JSONResponse(content={"error": True})
 
     user_id = request.session["USER-ID"] 
     new_name = update_data.name
